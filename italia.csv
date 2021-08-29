@@ -1,0 +1,47 @@
+id,locationId,name,status,address/street,address/city,address/state,address/zip,address/countryId,address/country,address/regionId,address/region,gps/latitude,gps/longitude,dateOpened,stallCount,counted,elevationMeters,powerKilowatt,solarCanopy,battery,statusDays,urlDiscuss, Region
+3442,olbiasupercharger,"Olbia, Italy",OPEN,Via Ragazzi del '99,Olbia,,07026,113,Italy,101,Europe,40.9068915,9.5159706,2021,4,true,16,250,false,false,0,true,Sardegna
+3359,cataniaitsupercharger,"Catania, Italy",OPEN,"Via Salvatore Quasimodo, 1",Catania,CT,95030,113,Italy,101,Europe,37.551544,15.066791,2021,4,true,282,250,false,false,0,true,Sicilia
+3384,oristanoitsupercharger,"Oristano, Italy",OPEN,Centro Commerciale Via Dublino,Oristano,OR,09170,113,Italy,101,Europe,39.8901246,8.5997914,2021,4,true,8,150,false,false,0,true,Sardegna
+3311,brindisisupercharger,"Brindisi, Italy",OPEN,At the Centro Commerciale Le Colonne shopping area along SS7,Brindisi,,72100,113,Italy,101,Europe,40.6198604,17.9026072,2021,8,true,31,250,false,false,0,true,Puglia
+2792,carsolioricolasupercharger,"Carsoli Oricola, Italy",OPEN,"Via Tiburtina, Km 68,500",Oricola,Provincia de L'Aquila,67063,113,Italy,101,Europe,42.082194,13.060417,2021,8,true,594,150,false,false,0,true,Abruzzo
+2239,addasudsupercharger,"Adda Sud, Italy",OPEN,Adda Sud,Caravaggio,Provincia di Bergamo,24043,113,Italy,101,Europe,45.510579,9.635503,2021,4,true,120,250,false,false,0,true,Lombardia
+2240,addanordsupercharger,"Adda Nord, Italy",OPEN,Adda Nord,Caravaggio,Provincia di Bergamo,24043,113,Italy,101,Europe,45.511805,9.63561,2021,4,true,120,250,false,false,0,true,Lombardia
+2589,romewestsupercharger,"Rome West, Italy",OPEN,Via Salvatore Rebecchini 145,Roma,,00148,113,Italy,101,Europe,41.814475,12.399297,2021,12,true,9,250,false,false,0,true,Lazio
+2523,aresesupercharger,"Arese, Italy",OPEN,Viale Giuseppe Eugenio Luraghi 11,Arese,Milano,20020,113,Italy,101,Europe,45.563508,9.052541,2020,20,true,175,250,false,false,0,true,Lombardia
+2537,grossetoitsupercharger,"Grosseto, Italy",OPEN,snc Via Ecuador 58100,Grosseto,,,113,Italy,101,Europe,42.789258,11.115675,2020,8,true,12,150,false,false,0,false,Toscana
+2317,forlisupercharger,"Forlì, Italy",OPEN,"Piazzale della Cooperazione, 2",Forlì,FC,47122,113,Italy,101,Europe,44.242877,12.081828,2020,12,true,18,250,false,false,0,true,Puglia
+1945,vicenzasupercharger,"Vicenza, Italy",OPEN,"Via Brescia, 53-63",Torri di Quartesolo,Vicenza,36040,113,Italy,101,Europe,45.508412,11.626038,2019,12,true,28,150,false,false,0,true,Veneto
+1996,borcadicadoresupercharger,"Borca di Cadore, Italy",OPEN,Via Roma 15,Borca di Cadore,Belluno,32040,113,Italy,101,Europe,46.435158,12.222934,2019,8,true,938,150,false,false,0,true,Veneto
+2048,tarquiniasupercharger,"Tarquinia, Italy",OPEN,Km 83 SS 1 Via Aurelia,Tarquinia,,01016,113,Italy,101,Europe,42.1831722,11.7879767,2019,10,true,39,150,false,false,0,true,Lazio
+1642,sondrioitsupercharger,"Sondrio, Italy",OPEN,"Strada Statale dello Stelvio Km 22,3",Forcola,,23010,113,Italy,101,Europe,46.165099,9.675995,2018,8,true,262,150,false,false,0,false,Lombardia
+1577,imperiasupercharger,"Imperia, Italy",OPEN,11 Via Garessio,Imperia,,18100,113,Italy,101,Europe,43.89258,8.039121,2018,10,true,8,150,false,false,0,false,Liguria
+1538,firenzeitsupercharger,"Firenze, Italy",OPEN,Via Tevere 23,Florence,,50019,113,Italy,101,Europe,43.810011,11.177737,2018,8,true,36,150,false,false,0,false,Toscana
+1453,piacenzaitsupercharger,"Piacenza, Italy",OPEN,"MH Hotel Piacenza Fiera, 127 Via Caorsana",Piacenza,,29122,113,Italy,101,Europe,45.039461,9.753871,2017,8,true,52,150,false,false,0,false,Emilia Romagna
+1214,bresciasupercharger,"Brescia, Italy",OPEN,"Via Einaudi snc, 25030 Roncadelle (BS)",Brescia,,,113,Italy,101,Europe,45.53224,10.164969,2017,12,true,120,150,false,false,0,false,Lombardia
+1213,palmisupercharger,"Palmi, Italy",OPEN,"Hotel Stella Maris, Contrada S. Gaetano",Palmi,,,113,Italy,101,Europe,38.366929,15.869555,2017,4,true,229,150,false,false,0,false,Calabria
+1189,trentosupercharger,"Trento, Italy",OPEN,"Via Innsbruck, 11, 38121",Trento,,,113,Italy,101,Europe,46.111577,11.092008,2017,10,true,195,150,false,false,0,false,Trentino Alto Adige
+1217,moranocalabrosupercharger,"Morano Calabro, Italy",OPEN,Loc. Campotenese,Morano Calabro,,87016,113,Italy,101,Europe,39.875989,16.065094,2017,4,true,971,150,false,false,0,false,Calabria
+1118,cerignolasupercharger,"Cerignola, Italy",OPEN,"km 3,600 Via Manfredonia",Cerignola,,71042,113,Italy,101,Europe,41.306389,15.899738,2017,8,true,67,150,false,false,0,false,Puglia
+1117,sangiovanniteatinosupercharger,"San Giovanni Teatino, Italy",OPEN,280 Via Pietro Nenni,San Giovanni Teatino,,66020,113,Italy,101,Europe,42.399194,14.16396,2017,8,true,23,150,false,false,0,false,Abruzzo
+1048,mercatosanseverinosupercharger,"Mercato San Severino, Italy",OPEN,12 Via Bagnara,Mercato San Severino,,84085,113,Italy,101,Europe,40.771952,14.746048,2017,6,true,153,150,false,false,0,false,Campania
+1040,occhiobellosupercharger,"Occhiobello, Italy",OPEN,36 Via Eridania,Occhiobello,,45030,113,Italy,101,Europe,44.918787,11.594051,2017,8,true,6,150,false,false,0,false,Veneto
+1005,moglianovenetosupercharger,"Mogliano Veneto, Italy",OPEN,1 Via BonfadiniMogliano VenetoItaly,Mogliano Veneto,,31021,113,Italy,101,Europe,45.584722,12.287137,2016,8,true,5,150,false,false,0,false,Veneto
+950,moncalierisupercharger,"Moncalieri, Italy",OPEN,Via Guido Rossa 11,Moncalieri,,,113,Italy,101,Europe,44.973333,7.730113,2016,8,true,224,150,false,false,0,false,Piemonte
+904,cepranosupercharger,"Ceprano, Italy",OPEN,27 Via Caragno,Ceprano,,03024,113,Italy,101,Europe,41.544226,13.511958,2016,8,true,98,150,false,false,0,false,Lazio
+878,fanosupercharger,"Fano, Italy",OPEN,2/A Via Luigi Einaudi,Fano,,61032,113,Italy,101,Europe,43.802874,13.015345,2016,4,true,21,130,false,false,0,false,Marche
+875,fortedeimarmisupercharger,"Forte dei Marmi, Italy",OPEN,"142 Via Giovan Battista Vico Forte dei Marmi,",Forte dei Marmi,,55042,113,Italy,101,Europe,43.956416,10.194539,2016,10,true,6,150,false,false,0,true,Toscana
+813,maglianosabinasupercharger,"Magliano, Italy",OPEN,"Hotel la Pergola Via Flaminia, Km 64",Magliano,,,113,Italy,101,Europe,42.372085,12.471703,2016,8,true,59,150,false,false,0,true,Toscana
+550,affisupercharger,"Affi, Italy",OPEN,Highway A22,Affi,,,113,Italy,101,Europe,45.551296,10.787143,2016,16,true,189,150,false,false,0,false,Veneto
+781,cavagliasupercharger,"Cavaglià, Italy",OPEN,"Via Santhià, 75,Cavaglià BI",Cavaglià,,13881,113,Italy,101,Europe,45.38967,8.128911,2016,8,true,221,150,false,false,0,false,Piemonte
+584,palmanovasupercharger,"Palmanova, Italy",OPEN,33041 Ioannis Aiello del Friuli,Palmanova,,,113,Italy,101,Europe,45.884158,13.344976,2015,16,true,18,250,false,false,0,false,Friuli Venezia Giulia
+711,campogallianosupercharger,"Campogalliano, Italy",OPEN,"Best Western, Modena District, 160 Via del Passatore",Campogalliano,,41011,113,Italy,101,Europe,44.685971,10.851913,2015,8,true,42,150,false,false,0,false,Emilia Romagna
+664,varazzesupercharger,"Varazze, Italy",OPEN,"Marina di Varazze, 24 Via Maestri d'Ascia",Varazze,,17019,113,Italy,101,Europe,44.351747,8.565401,2015,8,true,16,150,false,false,0,false,Liguria
+656,melegnanosupercharger,"Carpiano, Italy",OPEN,"Ibis Styles Milano Melegnano via Dosetti, Localita' Francolino Carpiano",Carpiano,,20080,113,Italy,101,Europe,45.34834,9.282206,2015,8,true,87,150,false,false,0,false,Lombardia
+603,brennerosupercharger,"Brennero, Italy",OPEN,by Plessi museum at the Brenner pass,Brennero,,,113,Italy,101,Europe,46.99533,11.502136,2015,16,true,1371,150,false,false,0,true,Trentino Alto Adige
+634,arezzosupercharger,"Arezzo, Italy",OPEN,36t Localita' Battifolle,Arezzo,,52100,113,Italy,101,Europe,43.437399,11.777607,2015,8,true,264,150,false,false,0,false,Toscana
+464,aostasupercharger,"Aosta, Italy",OPEN,"Località Autoporto, 33B",Pollein,,,113,Italy,101,Europe,45.73745,7.371416,2015,16,true,539,150,true,false,0,false,Valle d'Aosta
+475,veronasupercharger,"Verona, Italy",OPEN,"Verona Crowne Plaza, Via Belgio 16",Verona,,37135,113,Italy,101,Europe,45.412326,10.970212,2014,10,true,61,150,false,false,0,true,Veneto
+457,modenasupercharger,"Modena, Italy",OPEN,1684 Strada Vignolese,Modena,,41126,113,Italy,101,Europe,44.574119,10.981157,2014,12,true,47,150,false,false,0,false,Emilia Romagna
+301,dornosupercharger,"Dorno Ovest, Italy",OPEN,"Autostrada A7 Milano-Genova, Dorno Autogrill area",Dorno,,27020,113,Italy,101,Europe,45.147886,8.990914,2014,12,true,87,150,false,false,0,false,Lombardia
+1960,dornoestsupercharger,"Dorno Est, Italy",OPEN,"Autostrada A7 Genova-Milano, Dorno Autogrill area",Dorno,PV,,113,Italy,101,Europe,45.1473468,8.9912729,2014,6,true,88,150,false,false,0,false,Lombardia
+3527,Bergamoitsupercharger,"Bergamo, Italy",PERMIT,Stezzano Business Park,Stezzano,,24040,113,Italy,101,Europe,45.65885,9.645675,,4,true,215,250,false,false,31,true,Lombardia

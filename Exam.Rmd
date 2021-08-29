@@ -1,0 +1,611 @@
+---
+title: ""
+date: "`r Sys.Date()`"
+output:
+  rmdformats::downcute:
+    self_contained: true
+---
+
+
+```{r setup, include=FALSE}
+library(knitr)
+library(rmdformats)
+library(dplyr)
+library(highcharter)
+library(readr)
+library(plotrix)
+library(tm)
+library(wordcloud2)
+library(wordcloud)
+library("RColorBrewer")
+library(ggplot2)
+library(plotly)
+
+## Global options
+options(max.print="75")
+opts_chunk$set(echo=FALSE,
+	             cache=TRUE,
+               prompt=FALSE,
+               tidy=TRUE,
+               comment=NA,
+               message=FALSE,
+               warning=FALSE)
+opts_knit$set(width=75)
+```
+
+
+
+```{r include=FALSE}
+
+
+values <- read_csv("/Users/annasacchet/Desktop/ESAME FONDAMENTI SACCHET/Indagine auto elettriche.csv")
+View(values)
+```
+
+```{r include=FALSE}
+
+Electric <- read_csv("/Users/annasacchet/Desktop/ESAME FONDAMENTI SACCHET/Electric.csv")
+View(Electric)
+```
+
+```{r include=FALSE}
+colnames(values)[1:21] <- c("Info","Utente", "Genere", "Comune","Età", "Professione", "Titolo studio","Possesso","Categoria","Consiglio","Prova","Comprare","Prezzo","Punti di ricarica","Altro","Ecosostenibile","Emblema","Incentivi", "Risparmio carburante","Spesa max","Marchio")
+```
+
+```{r include=FALSE}
+
+mondo <- read_csv("/Users/annasacchet/Desktop/ESAME FONDAMENTI SACCHET/mondo.csv")
+View(mondo)
+```
+
+```{r include=FALSE}
+
+italia <- read_csv("/Users/annasacchet/Desktop/ESAME FONDAMENTI SACCHET/italia.csv")
+View(italia)
+```
+
+# Analisi dei dati  sui veicoli elettrici e ibridi
+
+## Cosa si intende con "veicolo elettrico"?
+
+- Una o più batterie ricaricabili
+- Fonte di energia primaria -> energia chimica rilasciata dalla/e batteria/e
+
+```{r elettric, echo=FALSE, fig.cap="Veicolo elettrico", out.width = '100%'}
+knitr::include_graphics("/Users/annasacchet/Desktop/ESAME FONDAMENTI SACCHET/elettric.jpeg")
+```
+## Cosa si intende con "veicolo ibrido"?
+
+- Due motori: uno a combustione e uno elettrico + batteria al litio di diverse dimensioni in base alla categoria
+- Tre categorie: Mild Hybrid (MHEV), Full Hybrid (HEV) e Plug-in (PHEV)
+
+
+```{r ibrida, echo=FALSE, fig.cap="Veicolo ibrido", out.width = '100%'}
+knitr::include_graphics("/Users/annasacchet/Desktop/ESAME FONDAMENTI SACCHET/ibrida.jpeg")
+```
+
+
+# Il genere delle persone che hanno risposto al mio sondaggio
+
+```{r include=FALSE} 
+
+df <- data.frame(
+        x = c(0, 1, 2),
+        y = c(109, 1, 61),
+        name = as.factor(c("Femmina", "Non specificato", "Maschio"))
+     
+)
+df
+
+```
+
+```{r echo=FALSE, fig.align='center'} 
+
+hc <- df %>%
+  hchart(
+    "pie", hcaes(x = name, y = y),
+    name = "Genere"
+
+    )
+
+hc
+
+```
+
+#  L'età delle persone che hanno risposto al mio sondaggio
+
+```{r, echo=FALSE, fig.align='center'}
+
+
+values %>% 
+  count(Età) %>% 
+  hchart('areaspline', hcaes(x = 'Età', y = 'n'))
+
+```
+
+
+
+
+# Il titolo studio delle persone che hanno risposto al mio sondaggio
+
+      
+```{r echo=FALSE}
+
+numeri = values %>%      #per trovare dataframe che mi conti quante femmine e quanti uomini ci sono. 
+ group_by(`Titolo studio`)  %>%
+ summarize(count = n()) 
+numeri
+
+
+highchart() %>% 
+  hc_chart(type ="column", options3d = list(enabled = TRUE, beta = 15, alpha = 15)) %>%
+    hc_add_series(data = values$'Titolo studio', name = "Titolo studio") %>%
+    hc_xAxis(categories = numeri$'Titolo studio')
+
+```
+
+
+# L'attuale professione delle persone che hanno risposto al mio sondaggio
+
+
+```{r, echo=FALSE}
+
+wordcloud(values$Professione,
+          scale=c(4,.5),      #dimensioni delle parole
+          min.freq=1,         #freq minima che le parole devono avere per comparire nel grafico
+          max.words=100,      #numero max di parole
+	random.order= FALSE,        #FALSE: le parole verranno tracciate con frequenza decrescente
+	random.color=FALSE,         #FALSE: il colore viene dato in base alla frequenza
+	rot.per=0.1,                #mette in proporzione le parole e applica rotazione di 90 gradi
+	colors=brewer.pal(8, "Set1"),  #palette colori
+	ordered.colors=FALSE,       #FALSE:  i colori vengono assegnati alle parole in ordine
+	#use.r.layout=FALSE,        
+	fixed.asp=TRUE)             #TRUE: proporzioni fisse
+```
+
+# I compilatori del sondaggio possiedono un veicolo ibrido oppure elettrico?
+
+```{r echo=FALSE}
+
+poss= values %>%       #dataframe per trovare quante donne ci sono per ogni Paese
+  group_by(Possesso) %>%
+  summarize(count = n()) %>%
+  arrange(desc(count)) %>%
+  mutate(Country= reorder (Possesso,count))%>%
+  top_n(20) %>%
+ 
+
+  hchart('bar', hcaes(x = 'Possesso', y = 'count')) %>%  
+  hc_title(text = 'Possesso') %>%  #titolo
+  hc_colors("lightblue") %>%  
+  hc_xAxis(title = list(text = "Risposte"))  #la scritta che identifica l'asse y
+
+  poss
+```
+
+## Di quale tipologia possiedono la vettura i votanti "SI"?
+
+```{r include=FALSE}
+
+numeri = values %>%      #per trovare dataframe che mi conti quante femmine e quanti uomini ci sono. 
+ group_by(Categoria)  %>%
+ summarize(count = n()) 
+
+numeri
+
+```
+
+```{r echo=FALSE}
+
+df <- data.frame(
+        x = c(0, 1, 2, 3),
+        y = c(3, 10, 4, 2),
+        name = as.factor(c("BEV", "HEV", "MHEV", "PHEV"))
+     
+)
+df
+
+hc <- df %>%
+  hchart(
+    "pie", hcaes(x = name, y = y),
+    
+    name = "Categoria",
+
+    )
+
+hc
+```
+
+
+# Quante persone che hanno risposto al sondaggio hanno mai provato questo tipo di veicolo?
+
+```{r, echo=FALSE}
+
+Prov= values %>%       #dataframe per trovare quante donne ci sono per ogni Paese
+  group_by(Prova) %>%
+  summarize(count = n()) %>%
+  arrange(desc(count)) %>%
+  mutate(Country= reorder (Prova,count))%>%
+  
+ 
+
+  hchart('bar', hcaes(x = 'Prova', y = 'count')) %>%  
+  hc_title(text = 'Prova') %>%  #titolo
+  hc_colors("lightblue") %>%  
+  hc_xAxis(title = list(text = "Risposte"))  #la scritta che identifica l'asse y
+
+  Prov
+```
+
+## Quante persone dopo la prova lo consiglierebbero?
+
+
+```{r include=FALSE}
+
+numeri = values %>%      #per trovare dataframe che mi conti quante femmine e quanti uomini ci sono. 
+ group_by(Consiglio)  %>%
+  filter(Prova == "Si")  %>%
+ summarize(count = n()) 
+
+numeri
+```
+
+```{r echo=FALSE}
+
+df <- data.frame(
+        x = c(0, 1),
+        y = c(10, 61),
+        name = as.factor(c("No", "Si"))
+     
+)
+df
+
+hc <- df %>%
+  hchart(
+    "pie", hcaes(x = name, y = y),
+    
+    name = "Consiglio",
+
+    )
+
+hc
+```
+
+## Quante persone dopo la prova invece lo acquisterebbero oppure no?
+
+```{r include=FALSE}
+
+numeri = values %>%      #per trovare dataframe che mi conti quante femmine e quanti uomini ci sono. 
+ group_by(Comprare)  %>%
+  filter(Prova == "Si")  %>%
+ summarize(count = n()) 
+
+numeri
+```
+
+```{r echo=FALSE}
+
+df <- data.frame(
+        x = c(0, 1),
+        y = c(11, 60),
+        name = as.factor(c("No", "Si"))
+     
+)
+df
+
+hc <- df %>%
+  hchart(
+    "pie", hcaes(x = name, y = y),
+    
+    name = "Acquisto",
+
+    )
+
+hc
+```
+
+
+
+
+
+
+# Ma quali sono i marchi più desiderati per un ipotetico acquisto?
+
+
+```{r echo=FALSE}
+
+Prov= values %>%       #dataframe per trovare quante donne ci sono per ogni Paese
+  group_by(Marchio) %>%
+  summarize(count = n()) %>%
+  arrange(desc(count)) %>%
+  mutate(marc= reorder (Marchio,count))%>%
+  top_n(3) %>%
+ 
+
+  hchart('bar', hcaes(x = 'Marchio', y = 'count')) %>%  
+  hc_title(text = 'Marchi più desiderati') %>%  #titolo
+  hc_colors("lightblue") %>%  
+  hc_xAxis(title = list(text = "Marchio"))  #la scritta che identifica l'asse y
+
+  Prov
+```
+
+## Quale produttore ha il maggior numero di veicoli?
+
+
+```{r echo=FALSE}
+
+prod = Electric %>%       #dataframe per trovare quante donne ci sono per ogni Paese
+  group_by(Brand) %>%
+  summarize(count = n()) %>%
+  arrange(desc(count)) %>%
+  mutate(marc= reorder (Brand,count))%>%
+  top_n(10) %>%
+ 
+
+  hchart('bar', hcaes(x = 'Brand', y = 'count')) %>%  
+  hc_title(text = 'Produttori con il maggior numero di veicoli') %>%  #titolo
+  hc_colors("lightblue") %>%  
+  hc_xAxis(title = list(text = "Marchio"))  #la scritta che identifica l'asse y
+
+  prod
+  
+```
+## In quale categoria stanno puntando le case automobilistiche?
+
+```{r echo=FALSE}
+
+Prov= Electric %>%       #dataframe per trovare quante donne ci sono per ogni Paese
+  group_by(BodyStyle) %>%
+  summarize(count = n()) %>%
+  arrange(desc(count)) %>%
+  mutate(marc= reorder (BodyStyle,count))%>%
+  
+ 
+
+  hchart('bar', hcaes(x = 'BodyStyle', y = 'count')) %>%  
+  hc_title(text = 'BodyStyle') %>%  #titolo
+  hc_colors("lightblue") %>%  
+  hc_xAxis(title = list(text = "BodyStyle"))  #la scritta che identifica l'asse y
+
+  Prov
+```
+
+# Un'occhio alle prestazioni..
+
+## Accelerazione e velocità massima
+
+```{r echo=FALSE}
+
+
+a <- ggplot(data = Electric) +
+  geom_point(mapping = aes(x = AccelSec, y = TopSpeed_KmH, colour = Brand, text = paste("brand: ", Brand, "<br>", "model: ", Model, "<br>", "AccelSec: ", AccelSec, "<br>", "TopSpeed: ", TopSpeed_KmH)))
+
+ggplotly(a, tooltip = c("text"))
+
+```
+
+
+## Accelerazione e prezzo
+
+```{r echo=FALSE}
+
+a <- ggplot(data = Electric) +
+  geom_point(mapping = aes(x = AccelSec, y = PriceEuro, colour = Brand, text = paste("brand: ", Brand, "<br>", "model: ", Model, "<br>", "price: ", PriceEuro, "<br>", "AccelSec: ", AccelSec)))
+
+ggplotly(a, tooltip = c("text"))
+  
+```
+## Autonomia e prezzo
+
+```{r echo=FALSE}
+
+
+# scatteplot of displ and hwy
+a <- ggplot(data = Electric) +
+  geom_point(mapping = aes(x = Range_Km, y = PriceEuro, colour = Brand, text = paste("brand: ", Brand, "<br>", "model: ", Model, "<br>", "price: ", PriceEuro, "<br>", "range km: ", Range_Km)))
+
+ggplotly(a, tooltip = c("text"))
+  
+  
+```
+## Trazione e velocità massima
+
+```{r echo=FALSE}
+
+# scatteplot of displ and hwy
+a <- ggplot(data = Electric) +
+  geom_point(mapping = aes(x = PowerTrain, y = TopSpeed_KmH, colour = PowerTrain, text = paste("brand: ", Brand, "<br>", "model: ", Model, "<br>", "PowerTrain: ", PowerTrain, "<br>", "TopSpeed: ", TopSpeed_KmH)))
+
+ggplotly(a, tooltip = c("text"))
+  
+```
+
+
+# Perchè le persone acquisterebbero questa tipologia di veicolo?
+
+
+```{r include=FALSE}
+
+pr = values %>%     
+ group_by(Ecosostenibile)  %>%
+
+ summarize(count = n()) 
+pr
+
+ric = values %>%      
+ group_by(`Risparmio carburante`)  %>%
+
+ summarize(count = n()) 
+ric
+
+
+num = values %>%     
+ group_by(Ecosostenibile)  %>%
+filter(`Risparmio carburante` == "Risposte") %>%
+ summarize(count = n()) 
+
+num
+
+```
+
+```{r echo=FALSE}
+
+
+highchart() %>% 
+  hc_chart(type = "venn") %>% 
+  hc_add_series(
+    dataLabels = list(style = list(fontSize = "20px")),
+    name = "Venn Diagram",
+    data = list(
+      list(
+        name = "Ecosostenibile",
+        sets = list("A"), value = 115
+        ),
+      list(
+        name = "Risparmio carburante",
+        sets = list("B"), value = 91
+        ),
+      list(
+        name = "Entrambi", sets = list("B", "A"), value = 71)
+      )
+  )
+
+```
+
+```{r include=FALSE}
+
+pr = values %>%     
+ group_by(Incentivi)  %>%
+
+ summarize(count = n()) 
+pr
+
+ric = values %>%      
+ group_by(Ecosostenibile)  %>%
+
+ summarize(count = n()) 
+ric
+
+
+num = values %>%     
+ group_by(Incentivi)  %>%
+filter(Ecosostenibile == "Risposte") %>%
+ summarize(count = n()) 
+
+num
+
+```
+
+# Perchè NON acquisterebbero invece questo tipo di veicolo?
+
+```{r include=FALSE}
+
+
+pr = values %>%      
+ group_by(Prezzo)  %>%
+
+ summarize(count = n()) 
+pr
+
+ric = values %>%      
+ group_by(`Punti di ricarica`)  %>%
+
+ summarize(count = n()) 
+ric
+
+
+num = values %>%     
+ group_by(`Punti di ricarica`)  %>%
+filter(Prezzo == "Risposte") %>%
+ summarize(count = n()) 
+
+num
+
+```
+
+```{r echo=FALSE}
+
+highchart() %>% 
+  hc_chart(type = "venn") %>% 
+  hc_add_series(
+    dataLabels = list(style = list(fontSize = "20px")),
+    name = "Venn Diagram",
+    data = list(
+      list(
+        name = "Prezzo",
+        sets = list("A"), value = 15
+        ),
+      list(
+        name = "Punti di ricarica",
+        sets = list("B"), value = 21
+        ),
+      list(
+        name = "Entrambi", sets = list("B", "A"), value = 8)
+      )
+  )
+
+```
+
+# Cosa vuol dire "Tesla Supercharger"? 
+
+Tesla Supercharger è una rete di stazioni di ricarica rapida costruito dal produttore americano di veicoli Tesla ad uso esclusivo delle auto elettriche da esso prodotte
+
+```{r ts, echo=FALSE, fig.cap="Telsa Supercharger", out.width = '100%'}
+knitr::include_graphics("/Users/annasacchet/Desktop/ESAME FONDAMENTI SACCHET/Supercharger.jpeg")
+```
+
+
+## Dove si trovano nel mondo?
+
+```{r echo=FALSE}
+data(worldgeojson, package = "highcharter")
+
+mondo %>% 
+  filter(!is.na(`address/country`)) %>% 
+  count(`address/country`) -> countries
+
+highchart() %>%
+hc_add_series_map(worldgeojson, countries, value = "n", joinBy = c('name','address/country'))  %>% 
+  #hc_colors(c("darkorange", "darkgray")) %>% 
+    hc_colorAxis(stops = color_stops()) %>% 
+    hc_title(text = "Tesla Supercharger nel Mondo") 
+
+```
+
+## Dove si concentrano in Europa?
+
+```{r europ, echo=FALSE, fig.cap="Supercharger Tesla Europa", out.width = '100%'}
+knitr::include_graphics("/Users/annasacchet/Desktop/ESAME FONDAMENTI SACCHET/europatesla.png")
+```
+
+## E nel territorio italiano?
+
+```{r ita, echo=FALSE, fig.cap="Supercharger Tesla Italia", out.width = '100%'}
+knitr::include_graphics("/Users/annasacchet/Desktop/ESAME FONDAMENTI SACCHET/italiatesla.png")
+```
+
+## In quali regioni italiane c'è una maggiore concentrazione?
+
+```{r echo=FALSE}
+italia %>% 
+  filter(!is.na(Region)) %>% 
+  count(Region) %>% 
+  hchart('treemap', hcaes(x = 'Region', value = 'n', color = 'n')) 
+```
+
+## In quali anni sono state installate in italia?
+
+```{r echo=FALSE}
+
+italia %>% 
+  count(`address/country`, dateOpened) %>% 
+  filter(!is.na(dateOpened))%>% 
+  hchart('bar', hcaes(x = `address/country`, y = 'n', group = dateOpened))
+ 
+```
+
+# Concludendo..
+
+Per riepilogare, in questa analisi possiamo notare come negli ultimi anni la presenza di autoveicoli elettrici e ibridi si stia ingrandendo e come le persone siano incuriosite da questo mondo anche se sono presenti parecchi dubbi ancora sulla convenienza e usabilità di queste vetture. 
+
