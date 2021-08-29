@@ -131,7 +131,7 @@ values %>%
       
 ```{r echo=FALSE}
 
-numeri = values %>%      #per trovare dataframe che mi conti quante femmine e quanti uomini ci sono. 
+numeri = values %>%     
  group_by(`Titolo studio`)  %>%
  summarize(count = n()) 
 numeri
@@ -161,13 +161,14 @@ wordcloud(values$Professione,
 	ordered.colors=FALSE,       #FALSE:  i colori vengono assegnati alle parole in ordine
 	#use.r.layout=FALSE,        
 	fixed.asp=TRUE)             #TRUE: proporzioni fisse
+
 ```
 
 # I compilatori del sondaggio possiedono un veicolo ibrido oppure elettrico?
 
 ```{r echo=FALSE}
 
-poss= values %>%       #dataframe per trovare quante donne ci sono per ogni Paese
+poss= values %>%      
   group_by(Possesso) %>%
   summarize(count = n()) %>%
   arrange(desc(count)) %>%
@@ -176,9 +177,9 @@ poss= values %>%       #dataframe per trovare quante donne ci sono per ogni Paes
  
 
   hchart('bar', hcaes(x = 'Possesso', y = 'count')) %>%  
-  hc_title(text = 'Possesso') %>%  #titolo
+  hc_title(text = 'Possesso') %>%  
   hc_colors("lightblue") %>%  
-  hc_xAxis(title = list(text = "Risposte"))  #la scritta che identifica l'asse y
+  hc_xAxis(title = list(text = "Risposte"))  
 
   poss
 ```
@@ -187,7 +188,7 @@ poss= values %>%       #dataframe per trovare quante donne ci sono per ogni Paes
 
 ```{r include=FALSE}
 
-numeri = values %>%      #per trovare dataframe che mi conti quante femmine e quanti uomini ci sono. 
+numeri = values %>%      
  group_by(Categoria)  %>%
  summarize(count = n()) 
 
@@ -221,7 +222,7 @@ hc
 
 ```{r, echo=FALSE}
 
-Prov= values %>%       #dataframe per trovare quante donne ci sono per ogni Paese
+Prov= values %>%       
   group_by(Prova) %>%
   summarize(count = n()) %>%
   arrange(desc(count)) %>%
@@ -232,7 +233,7 @@ Prov= values %>%       #dataframe per trovare quante donne ci sono per ogni Paes
   hchart('bar', hcaes(x = 'Prova', y = 'count')) %>%  
   hc_title(text = 'Prova') %>%  #titolo
   hc_colors("lightblue") %>%  
-  hc_xAxis(title = list(text = "Risposte"))  #la scritta che identifica l'asse y
+  hc_xAxis(title = list(text = "Risposte"))  
 
   Prov
 ```
@@ -242,7 +243,7 @@ Prov= values %>%       #dataframe per trovare quante donne ci sono per ogni Paes
 
 ```{r include=FALSE}
 
-numeri = values %>%      #per trovare dataframe che mi conti quante femmine e quanti uomini ci sono. 
+numeri = values %>%       
  group_by(Consiglio)  %>%
   filter(Prova == "Si")  %>%
  summarize(count = n()) 
@@ -275,7 +276,7 @@ hc
 
 ```{r include=FALSE}
 
-numeri = values %>%      #per trovare dataframe che mi conti quante femmine e quanti uomini ci sono. 
+numeri = values %>%     
  group_by(Comprare)  %>%
   filter(Prova == "Si")  %>%
  summarize(count = n()) 
@@ -314,7 +315,7 @@ hc
 
 ```{r echo=FALSE}
 
-Prov= values %>%       #dataframe per trovare quante donne ci sono per ogni Paese
+Prov= values %>%       
   group_by(Marchio) %>%
   summarize(count = n()) %>%
   arrange(desc(count)) %>%
@@ -323,9 +324,9 @@ Prov= values %>%       #dataframe per trovare quante donne ci sono per ogni Paes
  
 
   hchart('bar', hcaes(x = 'Marchio', y = 'count')) %>%  
-  hc_title(text = 'Marchi più desiderati') %>%  #titolo
+  hc_title(text = 'Marchi più desiderati') %>%  
   hc_colors("lightblue") %>%  
-  hc_xAxis(title = list(text = "Marchio"))  #la scritta che identifica l'asse y
+  hc_xAxis(title = list(text = "Marchio"))  
 
   Prov
 ```
@@ -335,7 +336,7 @@ Prov= values %>%       #dataframe per trovare quante donne ci sono per ogni Paes
 
 ```{r echo=FALSE}
 
-prod = Electric %>%       #dataframe per trovare quante donne ci sono per ogni Paese
+prod = Electric %>%       
   group_by(Brand) %>%
   summarize(count = n()) %>%
   arrange(desc(count)) %>%
@@ -344,18 +345,18 @@ prod = Electric %>%       #dataframe per trovare quante donne ci sono per ogni P
  
 
   hchart('bar', hcaes(x = 'Brand', y = 'count')) %>%  
-  hc_title(text = 'Produttori con il maggior numero di veicoli') %>%  #titolo
+  hc_title(text = 'Produttori con il maggior numero di veicoli') %>%  
   hc_colors("lightblue") %>%  
-  hc_xAxis(title = list(text = "Marchio"))  #la scritta che identifica l'asse y
-
+  hc_xAxis(title = list(text = "Marchio"))  
   prod
   
 ```
+
 ## In quale categoria stanno puntando le case automobilistiche?
 
 ```{r echo=FALSE}
 
-Prov= Electric %>%       #dataframe per trovare quante donne ci sono per ogni Paese
+Prov= Electric %>%      
   group_by(BodyStyle) %>%
   summarize(count = n()) %>%
   arrange(desc(count)) %>%
@@ -364,14 +365,14 @@ Prov= Electric %>%       #dataframe per trovare quante donne ci sono per ogni Pa
  
 
   hchart('bar', hcaes(x = 'BodyStyle', y = 'count')) %>%  
-  hc_title(text = 'BodyStyle') %>%  #titolo
+  hc_title(text = 'BodyStyle') %>%  
   hc_colors("lightblue") %>%  
-  hc_xAxis(title = list(text = "BodyStyle"))  #la scritta che identifica l'asse y
+  hc_xAxis(title = list(text = "BodyStyle"))  
 
   Prov
 ```
 
-# Un'occhio alle prestazioni..
+# Un occhio alle prestazioni..
 
 ## Accelerazione e velocità massima
 
@@ -401,7 +402,7 @@ ggplotly(a, tooltip = c("text"))
 ```{r echo=FALSE}
 
 
-# scatteplot of displ and hwy
+
 a <- ggplot(data = Electric) +
   geom_point(mapping = aes(x = Range_Km, y = PriceEuro, colour = Brand, text = paste("brand: ", Brand, "<br>", "model: ", Model, "<br>", "price: ", PriceEuro, "<br>", "range km: ", Range_Km)))
 
@@ -413,7 +414,7 @@ ggplotly(a, tooltip = c("text"))
 
 ```{r echo=FALSE}
 
-# scatteplot of displ and hwy
+
 a <- ggplot(data = Electric) +
   geom_point(mapping = aes(x = PowerTrain, y = TopSpeed_KmH, colour = PowerTrain, text = paste("brand: ", Brand, "<br>", "model: ", Model, "<br>", "PowerTrain: ", PowerTrain, "<br>", "TopSpeed: ", TopSpeed_KmH)))
 
@@ -552,7 +553,7 @@ highchart() %>%
 Tesla Supercharger è una rete di stazioni di ricarica rapida costruito dal produttore americano di veicoli Tesla ad uso esclusivo delle auto elettriche da esso prodotte
 
 ```{r ts, echo=FALSE, fig.cap="Telsa Supercharger", out.width = '100%'}
-knitr::include_graphics("/Users/annasacchet/Desktop/ESAME FONDAMENTI SACCHET/Supercharger.jpeg")
+knitr::include_graphics("Supercharger.jpeg")
 ```
 
 
@@ -576,13 +577,13 @@ hc_add_series_map(worldgeojson, countries, value = "n", joinBy = c('name','addre
 ## Dove si concentrano in Europa?
 
 ```{r europ, echo=FALSE, fig.cap="Supercharger Tesla Europa", out.width = '100%'}
-knitr::include_graphics("/Users/annasacchet/Desktop/ESAME FONDAMENTI SACCHET/europatesla.png")
+knitr::include_graphics("europatesla.png")
 ```
 
 ## E nel territorio italiano?
 
 ```{r ita, echo=FALSE, fig.cap="Supercharger Tesla Italia", out.width = '100%'}
-knitr::include_graphics("/Users/annasacchet/Desktop/ESAME FONDAMENTI SACCHET/italiatesla.png")
+knitr::include_graphics("italiatesla.png")
 ```
 
 ## In quali regioni italiane c'è una maggiore concentrazione?
@@ -607,5 +608,5 @@ italia %>%
 
 # Concludendo..
 
-Per riepilogare, in questa analisi possiamo notare come negli ultimi anni la presenza di autoveicoli elettrici e ibridi si stia ingrandendo e come le persone siano incuriosite da questo mondo anche se sono presenti parecchi dubbi ancora sulla convenienza e usabilità di queste vetture. 
+Per riepilogare, in questa analisi possiamo notare come negli ultimi anni la presenza di autoveicoli elettrici e ibridi si stia ingrandendo e come le persone siano incuriosite da questo mondo, anche se sono presenti parecchi dubbi ancora sulla convenienza e usabilità di queste vetture. 
 
