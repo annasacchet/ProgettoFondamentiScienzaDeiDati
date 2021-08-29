@@ -38,13 +38,13 @@ opts_knit$set(width=75)
 ```{r include=FALSE}
 
 
-values <- read_csv("/Users/annasacchet/Desktop/ESAME FONDAMENTI SACCHET/Indagine auto elettriche.csv")
+values <- read_csv("Indagine auto elettriche.csv")
 View(values)
 ```
 
 ```{r include=FALSE}
 
-Electric <- read_csv("/Users/annasacchet/Desktop/ESAME FONDAMENTI SACCHET/Electric.csv")
+Electric <- read_csv("Electric.csv")
 View(Electric)
 ```
 
@@ -54,13 +54,13 @@ colnames(values)[1:21] <- c("Info","Utente", "Genere", "Comune","Età", "Profess
 
 ```{r include=FALSE}
 
-mondo <- read_csv("/Users/annasacchet/Desktop/ESAME FONDAMENTI SACCHET/mondo.csv")
+mondo <- read_csv("mondo.csv")
 View(mondo)
 ```
 
 ```{r include=FALSE}
 
-italia <- read_csv("/Users/annasacchet/Desktop/ESAME FONDAMENTI SACCHET/italia.csv")
+italia <- read_csv("italia.csv")
 View(italia)
 ```
 
@@ -72,7 +72,7 @@ View(italia)
 - Fonte di energia primaria -> energia chimica rilasciata dalla/e batteria/e
 
 ```{r elettric, echo=FALSE, fig.cap="Veicolo elettrico", out.width = '100%'}
-knitr::include_graphics("/Users/annasacchet/Desktop/ESAME FONDAMENTI SACCHET/elettric.jpeg")
+knitr::include_graphics("elettric.jpeg")
 ```
 ## Cosa si intende con "veicolo ibrido"?
 
@@ -81,7 +81,7 @@ knitr::include_graphics("/Users/annasacchet/Desktop/ESAME FONDAMENTI SACCHET/ele
 
 
 ```{r ibrida, echo=FALSE, fig.cap="Veicolo ibrido", out.width = '100%'}
-knitr::include_graphics("/Users/annasacchet/Desktop/ESAME FONDAMENTI SACCHET/ibrida.jpeg")
+knitr::include_graphics("ibrida.jpeg")
 ```
 
 
